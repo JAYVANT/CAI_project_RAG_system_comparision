@@ -1,0 +1,277 @@
+{
+  "results": [
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's total revenue in 2023?",
+      "answer": "[2023 - management_discussion]: In 2023, PayPal's revenue was $3.3 billion, with an operating margin of 12.4%. In 2023, revenue increased by $1.5 billion, but it was still a high-margin business.\n\n[20...",
+      "full_answer": "[2023 - management_discussion]: In 2023, PayPal's revenue was $3.3 billion, with an operating margin of 12.4%. In 2023, revenue increased by $1.5 billion, but it was still a high-margin business.\n\n[2023 - management_discussion]: In 2023, revenue was $5.8 billion, with an operating margin of 15%. In 2023, revenue increased by $1.5 billion, but it was still a high-margin business.\n\n[2023 - management_discussion]: In 2023, revenue was $11.1 billion, with an operating margin of 12%. In 2023, revenue...",
+      "confidence": 1.893016747510328,
+      "quality_score": 0.6749999999999999,
+      "response_time": 3.4872498512268066,
+      "question_type": "factual",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's net income in 2024?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -0.07657870227655864,
+      "quality_score": 0.1,
+      "response_time": 3.300006866455078,
+      "question_type": "factual",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "How many active accounts does PayPal have?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -2.690182533007933,
+      "quality_score": 0.1,
+      "response_time": 3.1381001472473145,
+      "question_type": "factual",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "What is PayPal's competitive advantage?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -2.980616726912448,
+      "quality_score": 0.1,
+      "response_time": 2.984874963760376,
+      "question_type": "analytical",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "What are the main risks facing PayPal?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -3.5261722696105244,
+      "quality_score": 0.1,
+      "response_time": 2.8809070587158203,
+      "question_type": "analytical",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "How does PayPal plan to grow in the future?",
+      "answer": "We're excited to see the growth of PayPal as we move forward.\n\nAs a company that has been in the business for over a decade, we're excited to be part of a global and global movement that will see us e...",
+      "full_answer": "We're excited to see the growth of PayPal as we move forward.\n\nAs a company that has been in the business for over a decade, we're excited to be part of a global and global movement that will see us enter a new era of growth and prosperity.\n\nIt's important to note that the business world is still in the early stages of change, and the time frame for a company to truly thrive is yet to be determined. We are still a very young company, and we're still making progress, but the world is changing.\n\nI...",
+      "confidence": 2.7836661226664283,
+      "quality_score": 0.3833333333333333,
+      "response_time": 2.711786985397339,
+      "question_type": "strategic",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "What is the capital of France?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -7.781043853264401,
+      "quality_score": 0.1,
+      "response_time": 2.8171589374542236,
+      "question_type": "irrelevant",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "How do you make chocolate cake?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -7.755100147720185,
+      "quality_score": 0.1,
+      "response_time": 2.77665114402771,
+      "question_type": "irrelevant",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "What is quantum computing?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -7.516921288591573,
+      "quality_score": 0.1,
+      "response_time": 2.957975149154663,
+      "question_type": "irrelevant",
+      "sources_used": 3
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's total revenue in 2023?",
+      "answer": "PayPal has revenue of $1.8 billion in 2023, of which $2 billion goes to the United States.\nSource: http://www.businessinsider.com/2013/01/20/what-was-paypal-total-gross-transaction-in-2023/\nSource: ht...",
+      "full_answer": "PayPal has revenue of $1.8 billion in 2023, of which $2 billion goes to the United States.\nSource: http://www.businessinsider.com/2013/01/20/what-was-paypal-total-gross-transaction-in-2023/\nSource: http://www.businessinsider.com/2013/01/20/what-was-paypal-total-gross-transaction-in-2023/\nSource: http://www.businessinsider.com/2013/01/20/what-was-paypal-total-gross-transaction-in-2023/\nSource: http://www.businessinsider.com",
+      "confidence": 0.8243888417020628,
+      "quality_score": 0.825,
+      "response_time": 2.1601622104644775,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's net income in 2024?",
+      "answer": "The total revenue from the PayPal business in 2024 was $1.3",
+      "full_answer": "The total revenue from the PayPal business in 2024 was $1.3",
+      "confidence": 0.7515658992144193,
+      "quality_score": 0.5333333333333333,
+      "response_time": 2.051316976547241,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "How many active accounts does PayPal have?",
+      "answer": "The number of active accounts is based on how many people have been signed up for PayPal.\nIt's possible that there are many people signed up for PayPal. But if you're a new user, you'll need to have a...",
+      "full_answer": "The number of active accounts is based on how many people have been signed up for PayPal.\nIt's possible that there are many people signed up for PayPal. But if you're a new user, you'll need to have a password to sign up.\nYou'll need to sign up with your bank and check in at your bank.\nPayPal will send you an email with the information you need to sign up and it will give you a link to your PayPal account.\nWhen you sign up for PayPal, you'll get an email from PayPal that includes a link to your ...",
+      "confidence": 0.8694055782462672,
+      "quality_score": 0.6166666666666666,
+      "response_time": 2.0436789989471436,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "What is PayPal's competitive advantage?",
+      "answer": "PayPal offers a wide variety of products and services to our customers. We offer a wide variety of services to our customers. We have a number of different business models to choose from. We also offe...",
+      "full_answer": "PayPal offers a wide variety of products and services to our customers. We offer a wide variety of services to our customers. We have a number of different business models to choose from. We also offer a wide variety of services to our customers. If you have any questions about our products or services, please contact us at support@paypal.com.\nAbout PayPal\n\nPayPal is an online payment processing company that delivers business to the world's largest and most trusted online payment processors. We ...",
+      "confidence": 0.857192822540769,
+      "quality_score": 0.3833333333333333,
+      "response_time": 2.0896029472351074,
+      "question_type": "analytical",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "What are the main risks facing PayPal?",
+      "answer": "You'll be surprised how many of the risks are being discussed in this article.\nWe are not going to talk about what the risks are for PayPal. We will talk about the risks we have and the potential risk...",
+      "full_answer": "You'll be surprised how many of the risks are being discussed in this article.\nWe are not going to talk about what the risks are for PayPal. We will talk about the risks we have and the potential risks we have.\nWe want to start with a quick overview of the risks that PayPal is facing, and the potential risks that it may be facing.\nWhat is PayPal?\nPayPal is a global payment system that is based on peer-to-peer payment systems that are based on a blockchain, which is a secure digital ledger of tra...",
+      "confidence": 0.8806849976402711,
+      "quality_score": 0.3833333333333333,
+      "response_time": 2.1223888397216797,
+      "question_type": "analytical",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "How does PayPal plan to grow in the future?",
+      "answer": "PayPal plans to grow in the future by adding more services to its platform, such as payments, payments processing, and the ability to manage its customer data.\nWe're very excited about this. PayPal's ...",
+      "full_answer": "PayPal plans to grow in the future by adding more services to its platform, such as payments, payments processing, and the ability to manage its customer data.\nWe're very excited about this. PayPal's growth will come from its ability to offer a more reliable and secure payment method and service. This is a critical component of PayPal's growth plan.\nWe believe that by increasing its user base and increasing its user base, PayPal will be able to grow faster and more effectively.\nOur goal is to ma...",
+      "confidence": 0.7667984196893564,
+      "quality_score": 0.3833333333333333,
+      "response_time": 2.0879170894622803,
+      "question_type": "strategic",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "What is the capital of France?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.8326438259047342,
+      "quality_score": 0.1,
+      "response_time": 2.045560836791992,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "How do you make chocolate cake?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.8111233689827475,
+      "quality_score": 0.1,
+      "response_time": 2.0413267612457275,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "What is quantum computing?",
+      "answer": "The first is that the problem of quantum computers is very difficult. The problem is that we are using only a small number of particles to do our calculations. This is why the size of the particles is...",
+      "full_answer": "The first is that the problem of quantum computers is very difficult. The problem is that we are using only a small number of particles to do our calculations. This is why the size of the particles is so small. It's also because of the",
+      "confidence": 0.8440088778275061,
+      "quality_score": 0.3,
+      "response_time": 2.0228660106658936,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    }
+  ],
+  "metrics": {
+    "overall": {
+      "RAG": {
+        "avg_quality": 0.19537037037037036,
+        "avg_confidence": -3.072214739022985,
+        "avg_response_time": 3.006079011493259,
+        "std_quality": 0.20280631458257872,
+        "total_sources": 27
+      },
+      "Fine-Tuned": {
+        "avg_quality": 0.4027777777777778,
+        "avg_confidence": 0.8264236257497927,
+        "avg_response_time": 2.0738689634535046,
+        "std_quality": 0.233482095435365,
+        "total_sources": 0
+      }
+    },
+    "by_category": {
+      "high_confidence_relevant": {
+        "RAG": {
+          "quality": 0.29166666666666663,
+          "confidence": -0.2912481625913879,
+          "time": 3.308452288309733
+        },
+        "Fine-Tuned": {
+          "quality": 0.6583333333333333,
+          "confidence": 0.8151201063875831,
+          "time": 2.085052728652954
+        }
+      },
+      "low_confidence_relevant": {
+        "RAG": {
+          "quality": 0.19444444444444442,
+          "confidence": -1.2410409579521815,
+          "time": 2.8591896692911782
+        },
+        "Fine-Tuned": {
+          "quality": 0.3833333333333333,
+          "confidence": 0.8348920799567988,
+          "time": 2.0999696254730225
+        }
+      },
+      "irrelevant": {
+        "RAG": {
+          "quality": 0.10000000000000002,
+          "confidence": -7.684355096525386,
+          "time": 2.8505950768788657
+        },
+        "Fine-Tuned": {
+          "quality": 0.16666666666666666,
+          "confidence": 0.829258690904996,
+          "time": 2.0365845362345376
+        }
+      }
+    }
+  },
+  "timestamp": "20250823_002526"
+}

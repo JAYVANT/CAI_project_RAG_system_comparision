@@ -1,0 +1,277 @@
+{
+  "results": [
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's total revenue in 2023?",
+      "answer": "[2023 - management_discussion]: revenue from the Company was $0.039 per share.\n\n[2023 - management_discussion]: revenue from the Company was $0.039 per share.\n\n[2023 - management_discussion]: revenue ...",
+      "full_answer": "[2023 - management_discussion]: revenue from the Company was $0.039 per share.\n\n[2023 - management_discussion]: revenue from the Company was $0.039 per share.\n\n[2023 - management_discussion]: revenue from the Company was $0.039 per share.\n\n[2023 - management_discussion]: revenue from the Company was $0.039 per share.\n\n[2023 - management_discussion]: revenue from the Company was $0.039 per share.\n\n[2023 - management_discussion]: revenue from the Company was $0.039 per share.\n\n[2023 -",
+      "confidence": 1.893016747510328,
+      "quality_score": 0.6499999999999999,
+      "response_time": 3.2446160316467285,
+      "question_type": "factual",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's net income in 2024?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -0.07657870227655864,
+      "quality_score": 0.1,
+      "response_time": 2.9677319526672363,
+      "question_type": "factual",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "How many active accounts does PayPal have?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -2.690182533007933,
+      "quality_score": 0.1,
+      "response_time": 3.117871046066284,
+      "question_type": "factual",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "What is PayPal's competitive advantage?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -2.980616726912448,
+      "quality_score": 0.1,
+      "response_time": 2.676719903945923,
+      "question_type": "analytical",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "What are the main risks facing PayPal?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -3.5261722696105244,
+      "quality_score": 0.1,
+      "response_time": 2.652080774307251,
+      "question_type": "analytical",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "How does PayPal plan to grow in the future?",
+      "answer": "\"The new leadership team has proven to be a solid catalyst for growth in our business, and we are grateful for the opportunity to work with them to deliver a strong and sustainable business model.\"\n\n[...",
+      "full_answer": "\"The new leadership team has proven to be a solid catalyst for growth in our business, and we are grateful for the opportunity to work with them to deliver a strong and sustainable business model.\"\n\n[2023 - business_overview]: The Board believes that our Board's continued commitment to building relationships with leaders from around the world will benefit our business and our shareholders, and will provide an excellent foundation for our future growth and long-term growth.\n\n[2023 - business_over...",
+      "confidence": 2.7836661226664283,
+      "quality_score": 0.3833333333333333,
+      "response_time": 2.8104660511016846,
+      "question_type": "strategic",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "What is the capital of France?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -7.781043853264401,
+      "quality_score": 0.1,
+      "response_time": 2.969590902328491,
+      "question_type": "irrelevant",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "How do you make chocolate cake?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -7.755100147720185,
+      "quality_score": 0.1,
+      "response_time": 2.8078510761260986,
+      "question_type": "irrelevant",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "What is quantum computing?",
+      "answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "full_answer": "I don't have sufficient confidence to answer this question based on the available PayPal report data. Please rephrase or ask about specific financial metrics, revenue, users, or business segments.",
+      "confidence": -7.516921288591573,
+      "quality_score": 0.1,
+      "response_time": 2.9276440143585205,
+      "question_type": "irrelevant",
+      "sources_used": 3
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's total revenue in 2023?",
+      "answer": "PayPal's revenue from online services was $6",
+      "full_answer": "PayPal's revenue from online services was $6",
+      "confidence": 0.8384989558903521,
+      "quality_score": 0.32499999999999996,
+      "response_time": 2.073523998260498,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's net income in 2024?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.7062048396639805,
+      "quality_score": 0.1,
+      "response_time": 2.0105361938476562,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "How many active accounts does PayPal have?",
+      "answer": "PayPal has about 3,500 active accounts. It's easy to see how many of these accounts you have. The company has about 2,500 active accounts and only about 2,000 active accounts. There are about 5,000 ac...",
+      "full_answer": "PayPal has about 3,500 active accounts. It's easy to see how many of these accounts you have. The company has about 2,500 active accounts and only about 2,000 active accounts. There are about 5,000 active accounts.\nPayPal's business model is a very simple one. You create a PayPal account and pay a fee for the account. This fee is usually based on the amount you paid to the account. You don't want to charge the fee to the account if you are not doing your job.\nIf you don't have a PayPal account t...",
+      "confidence": 0.7500126558795193,
+      "quality_score": 0.6166666666666666,
+      "response_time": 1.995089054107666,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "What is PayPal's competitive advantage?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.7287728671301757,
+      "quality_score": 0.1,
+      "response_time": 2.120408773422241,
+      "question_type": "analytical",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "What are the main risks facing PayPal?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.896961250138422,
+      "quality_score": 0.1,
+      "response_time": 2.010176658630371,
+      "question_type": "analytical",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "How does PayPal plan to grow in the future?",
+      "answer": "PayPal's plans are very much in place. We are still working on new features and APIs, but we will continue to work on the best way to deliver on our promise of being the best online payment system eve...",
+      "full_answer": "PayPal's plans are very much in place. We are still working on new features and APIs, but we will continue to work on the best way to deliver on our promise of being the best online payment system ever.\nThanks for reading!",
+      "confidence": 0.784534146724564,
+      "quality_score": 0.3,
+      "response_time": 0.6389031410217285,
+      "question_type": "strategic",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "What is the capital of France?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.7460662362881348,
+      "quality_score": 0.1,
+      "response_time": 1.9846389293670654,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "How do you make chocolate cake?",
+      "answer": "You can make a cake with a little bit of coconut milk by mixing a little coconut oil, which is called a",
+      "full_answer": "You can make a cake with a little bit of coconut milk by mixing a little coconut oil, which is called a",
+      "confidence": 0.8025702539087949,
+      "quality_score": 0.15,
+      "response_time": 2.078900098800659,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "What is quantum computing?",
+      "answer": "Quantum computing is the ability to imagine a new system of particles, known as quantum computers, that can be built from existing data. This is a key element of quantum computing, which has been wide...",
+      "full_answer": "Quantum computing is the ability to imagine a new system of particles, known as quantum computers, that can be built from existing data. This is a key element of quantum computing, which has been widely recognized as a powerful technology.\nIn a recent article, we have introduced an example of quantum computing that is not currently being used in research.\nThe paper is titled \"Quantum Computing and Quantum Physics.\"\nTo read the paper, click on the image below.\nThe paper is titled \"Quantum Computi...",
+      "confidence": 0.723500418166158,
+      "quality_score": 0.15,
+      "response_time": 2.068256139755249,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    }
+  ],
+  "metrics": {
+    "overall": {
+      "RAG": {
+        "avg_quality": 0.1925925925925926,
+        "avg_confidence": -3.072214739022985,
+        "avg_response_time": 2.9082857502831354,
+        "std_quality": 0.19545372980280307,
+        "total_sources": 27
+      },
+      "Fine-Tuned": {
+        "avg_quality": 0.2157407407407407,
+        "avg_confidence": 0.7752357359766779,
+        "avg_response_time": 1.886714776357015,
+        "std_quality": 0.173927489503351,
+        "total_sources": 0
+      }
+    },
+    "by_category": {
+      "high_confidence_relevant": {
+        "RAG": {
+          "quality": 0.28333333333333327,
+          "confidence": -0.2912481625913879,
+          "time": 3.1100730101267495
+        },
+        "Fine-Tuned": {
+          "quality": 0.34722222222222215,
+          "confidence": 0.764905483811284,
+          "time": 2.02638308207194
+        }
+      },
+      "low_confidence_relevant": {
+        "RAG": {
+          "quality": 0.19444444444444442,
+          "confidence": -1.2410409579521815,
+          "time": 2.7130889097849527
+        },
+        "Fine-Tuned": {
+          "quality": 0.16666666666666666,
+          "confidence": 0.8034227546643873,
+          "time": 1.5898295243581135
+        }
+      },
+      "irrelevant": {
+        "RAG": {
+          "quality": 0.10000000000000002,
+          "confidence": -7.684355096525386,
+          "time": 2.9016953309377036
+        },
+        "Fine-Tuned": {
+          "quality": 0.13333333333333333,
+          "confidence": 0.7573789694543626,
+          "time": 2.043931722640991
+        }
+      }
+    }
+  },
+  "timestamp": "20250822_231356"
+}

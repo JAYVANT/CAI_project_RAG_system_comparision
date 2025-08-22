@@ -1,0 +1,14 @@
+# Ignore files larger than 10MB
+/models/paypal_finetuned/model.safetensors
+/venv/lib/python3.9/site-packages/cryptography/hazmat/bindings/_rust.abi3.so
+/venv/lib/python3.9/site-packages/llvmlite/binding/libllvmlite.dylib
+/venv/lib/python3.9/site-packages/torch/lib/libtorch_python.dylib
+/venv/lib/python3.9/site-packages/torch/lib/libtorch_cpu.dylib
+/venv/lib/python3.9/site-packages/numpy/.dylibs/libopenblas64_.0.dylib
+/venv/lib/python3.9/site-packages/6c7190bc8b55ffe67f57__mypyc.cpython-39-darwin.so
+/venv/lib/python3.9/site-packages/scipy/.dylibs/libopenblas.0.dylib
+/venv/lib/python3.9/site-packages/pydeck/nbextension/static/index.js.map
+/venv/lib/python3.9/site-packages/pyarrow/libarrow_flight.2100.dylib
+/venv/lib/python3.9/site-packages/pyarrow/libarrow_compute.2100.dylib
+/venv/lib/python3.9/site-packages/pyarrow/libarrow.2100.dylib
+/venv/share/jupyter/nbextensions/pydeck/index.js.map

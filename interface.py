@@ -17,6 +17,11 @@ from datetime import datetime
 # Import our modules
 from rag_system import load_and_initialize_rag
 from finetune_system import PayPalFineTunedModel, FineTuneGuardrails
+import logging
+
+# Setup logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Page configuration
 st.set_page_config(
@@ -64,6 +69,20 @@ class PayPalQAInterface:
             st.session_state.comparison_results = []
         if 'current_mode' not in st.session_state:
             st.session_state.current_mode = 'compare'
+            
+        # Initialize systems if not already done
+        if 'systems_initialized' not in st.session_state:
+            try:
+                # Initialize with default HuggingFace model
+                rag, guardrails, data = load_and_initialize_rag(use_default_model=True)
+                st.session_state.rag_system = rag
+                st.session_state.rag_guardrails = guardrails
+                st.session_state.processed_data = data
+                st.session_state.systems_initialized = True
+                logger.info("Successfully initialized systems with default model")
+            except Exception as e:
+                st.error(f"Error initializing systems: {str(e)}")
+                st.session_state.systems_initialized = False
     
     def display_header(self):
         """Display application header"""
@@ -399,16 +418,26 @@ class PayPalQAInterface:
 def load_systems():
     """Load both RAG and Fine-tuned systems"""
     try:
-        # Load RAG system
-        rag_system, rag_guardrails, processed_data = load_and_initialize_rag()
+        # Load RAG system with default model if custom model not available
+        logger.info("Initializing RAG system...")
+        rag_system, rag_guardrails, processed_data = load_and_initialize_rag(use_default_model=True)
         
-        # Load Fine-tuned system
+        # Load Fine-tuned system with fallback
+        logger.info("Initializing Fine-tuned system...")
         ft_system = PayPalFineTunedModel()
         model_path = "./models/paypal_finetuned"
-        if Path(model_path).exists():
-            ft_system.load_model(model_path)
+        try:
+            if Path(model_path).exists():
+                ft_system.load_model(model_path)
+                logger.info("Loaded custom fine-tuned model")
+            else:
+                logger.warning("Custom model not found, using default model")
+        except Exception as model_error:
+            logger.warning(f"Error loading custom model, using default: {model_error}")
+            
         ft_guardrails = FineTuneGuardrails()
         
+        logger.info("Successfully initialized all systems")
         return {
             'rag': rag_system,
             'rag_guardrails': rag_guardrails,
@@ -417,7 +446,9 @@ def load_systems():
             'data': processed_data
         }
     except Exception as e:
-        st.error(f"Error loading systems: {e}")
+        error_msg = f"Error initializing systems: {str(e)}"
+        logger.error(error_msg)
+        st.error(error_msg)
         return None
 
 def main():

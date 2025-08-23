@@ -201,23 +201,26 @@ class PayPalQAInterface:
         # Answer
         st.markdown("<div class='answer-box'>", unsafe_allow_html=True)
         st.write("**Answer:**")
-        st.write(result['answer'])
-        st.markdown("</div>", unsafe_allow_html=True)
-        
-        # Metrics in a single row
-        confidence_color = "🟢" if result['confidence'] > 0.7 else "🟡" if result['confidence'] > 0.4 else "🔴"
-        
-        # Display metrics in a formatted way without nested columns
-        st.write(f"**Confidence:** {confidence_color} {result['confidence']:.1%}")
-        st.write(f"**Response Time:** {result['time']:.2f}s")
-        
-        if system == 'rag' and 'sources' in result:
-            st.write(f"**Sources Used:** {len(result['sources'])}")
+        if result and 'answer' in result:
+            st.markdown(result['answer'])  # Use markdown for better formatting
         else:
+            st.markdown("No answer available.")
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # Metrics in a single row
+        if result and 'confidence' in result:
+            confidence_color = "🟢" if result['confidence'] > 0.7 else "🟡" if result['confidence'] > 0.4 else "🔴"
+            st.write(f"**Confidence:** {confidence_color} {result['confidence']:.1%}")
+        if result and 'time' in result:
+            st.write(f"**Response Time:** {result['time']:.2f}s")
+
+        if system == 'rag' and result and 'sources' in result:
+            st.write(f"**Sources Used:** {len(result['sources'])}")
+        elif result:
             st.write(f"**Method:** {result.get('method', 'Fine-Tuned')}")
-        
+
         # Sources for RAG
-        if system == 'rag' and 'sources' in result and result['sources']:
+        if system == 'rag' and result and 'sources' in result and result['sources']:
             with st.expander("📚 View Sources"):
                 for i, source in enumerate(result['sources'][:3]):
                     st.write(f"**Source {i+1}:**")
@@ -334,26 +337,36 @@ class PayPalQAInterface:
                 )
                 st.session_state.selected_question = None
             else:
-                question = st.text_area(
-                    "Enter your question:",
-                    placeholder="E.g., What was PayPal's revenue in 2023?",
-                    height=80
-                )
-            
-            col1, col2, col3 = st.columns([1, 1, 4])
-            with col1:
-                if st.button("🚀 Get Answer", type="primary"):
-                    if question:
-                        results = self.process_question(question)
-                        self.display_results(results, question)
-                    else:
-                        st.warning("Please enter a question")
-            
-            with col2:
-                if st.button("🔄 Clear"):
-                    st.session_state.clear()
-                    st.rerun()
-        
+                question = st.text_area("Enter your question:", height=80)
+
+            col1, col2 = st.columns([1, 1])
+            if col1.button("🚀 Get Answer", type="primary"):
+                if question:
+                    results = self.process_question(question)
+                    self.display_results(results, question)
+                else:
+                    st.warning("Please enter a question")
+            if col2.button("🔄 Clear"):
+                st.session_state.clear()
+                st.rerun()
+
+            # Chat history display
+            st.markdown("---")
+            st.markdown("### 🗨️ Chat History")
+            if st.session_state.questions_history:
+                for q in st.session_state.questions_history[-10:]:
+                        # Use a more visible background for chat bubbles
+                        st.markdown(f"<div style='background-color:#0070ba; color:#fff; border-radius:0.5rem; padding:0.5rem; margin-bottom:0.5rem'><b>Q:</b> {q}</div>", unsafe_allow_html=True)
+                        # Find corresponding answer
+                        answer_text = None
+                        for r in st.session_state.comparison_results[::-1]:
+                            if r['question'] == q:
+                                # Show both RAG and FT confidence if available
+                                rag_conf = f"RAG Confidence: {r['rag_confidence']:.1%}" if 'rag_confidence' in r else ""
+                                ft_conf = f"FT Confidence: {r['ft_confidence']:.1%}" if 'ft_confidence' in r else ""
+                                answer_text = f"{rag_conf} {ft_conf}"
+                                break
+                        st.markdown(f"<div style='background-color:#009cde; color:#fff; border-radius:0.5rem; padding:0.5rem; margin-bottom:1rem'><b>A:</b> {answer_text if answer_text else 'No answer available.'}</div>", unsafe_allow_html=True)
         with tab2:
             self.display_analytics()
         

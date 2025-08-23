@@ -242,19 +242,75 @@ class PayPalReportProcessor:
         # Add template Q&As
         qa_pairs.extend(qa_templates)
         
-        # Generate section-specific questions
-        for section_name in ['financial_highlights', 'income_statement', 'business_overview']:
+        # Generate section-specific questions (extract more sentences)
+        for section_name in ['financial_highlights', 'income_statement', 'business_overview', 'risk_factors', 'management_discussion', 'cash_flow', 'balance_sheet', 'executive_summary']:
             if sections_2023.get(section_name):
-                # Extract key sentences for Q&A
-                sentences = sections_2023[section_name].split('.')[:5]  # First 5 sentences
+                # Extract more sentences for Q&A
+                sentences = sections_2023[section_name].split('.')[:15]  # First 15 sentences
                 for sentence in sentences:
-                    if len(sentence) > 50 and any(word in sentence.lower() for word in ['revenue', 'income', 'growth', 'increased', 'decreased']):
+                    sent = sentence.strip()
+                    if len(sent) > 40 and any(word in sent.lower() for word in ['revenue', 'income', 'growth', 'increased', 'decreased', 'risk', 'cash', 'assets', 'liabilities', 'accounts', 'volume', 'profit', 'loss', 'expense']):
                         qa_pairs.append({
                             'question': f"What does the 2023 report say about {section_name.replace('_', ' ')}?",
-                            'answer': sentence.strip() + '.',
+                            'answer': sent + '.',
                             'year': '2023',
                             'type': 'descriptive'
                         })
+        for section_name in ['financial_highlights', 'income_statement', 'business_overview', 'risk_factors', 'management_discussion', 'cash_flow', 'balance_sheet', 'executive_summary']:
+            if sections_2024.get(section_name):
+                sentences = sections_2024[section_name].split('.')[:15]
+                for sentence in sentences:
+                    sent = sentence.strip()
+                    if len(sent) > 40 and any(word in sent.lower() for word in ['revenue', 'income', 'growth', 'increased', 'decreased', 'risk', 'cash', 'assets', 'liabilities', 'accounts', 'volume', 'profit', 'loss', 'expense']):
+                        qa_pairs.append({
+                            'question': f"What does the 2024 report say about {section_name.replace('_', ' ')}?",
+                            'answer': sent + '.',
+                            'year': '2024',
+                            'type': 'descriptive'
+                        })
+        # Add negative/out-of-domain Q&A pairs
+        negative_questions = [
+            "What is the capital of France?",
+            "Who won the FIFA World Cup in 2022?",
+            "What is the recipe for chocolate cake?",
+            "What is the weather in San Francisco?",
+            "Who is the CEO of Apple?"
+        ]
+        for nq in negative_questions:
+            qa_pairs.append({
+                'question': nq,
+                'answer': "Information not available in provided context.",
+                'year': 'N/A',
+                'type': 'irrelevant'
+            })
+        # Add more analytical/comparative questions
+        analytical_templates = [
+            {
+                'question': "What are the key risks PayPal faced in 2023?",
+                'answer': sections_2023.get('risk_factors', 'Information not available in provided context.')[:300],
+                'year': '2023',
+                'type': 'analytical'
+            },
+            {
+                'question': "What are the key risks PayPal faced in 2024?",
+                'answer': sections_2024.get('risk_factors', 'Information not available in provided context.')[:300],
+                'year': '2024',
+                'type': 'analytical'
+            },
+            {
+                'question': "Summarize PayPal's business overview for 2023.",
+                'answer': sections_2023.get('business_overview', 'Information not available in provided context.')[:300],
+                'year': '2023',
+                'type': 'analytical'
+            },
+            {
+                'question': "Summarize PayPal's business overview for 2024.",
+                'answer': sections_2024.get('business_overview', 'Information not available in provided context.')[:300],
+                'year': '2024',
+                'type': 'analytical'
+            }
+        ]
+        qa_pairs.extend(analytical_templates)
         
         logger.info(f"Generated {len(qa_pairs)} Q&A pairs")
         return qa_pairs

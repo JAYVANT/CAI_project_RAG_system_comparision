@@ -52,10 +52,10 @@ class PayPalRAGSystem:
         self.sparse_matrix = None
         self.chunks = []
         
-        # Retrieval parameters
-        self.top_k_dense = 5
-        self.top_k_sparse = 5
-        self.rerank_top_k = 3
+        # Initialize retrieval parameters (increase for better context)
+        self.top_k_dense = 10
+        self.top_k_sparse = 10
+        self.rerank_top_k = 6
         
     def build_indices(self, chunks: List[Dict[str, Any]]):
         """
@@ -171,14 +171,15 @@ class PayPalRAGSystem:
         expansions = []
         
         if 'account' in query_lower:
-            expansions.extend(['active accounts', 'user accounts', 'customer accounts', 'accounts active'])
-        
+            expansions.extend(['active accounts', 'user accounts', 'customer accounts', 'accounts active', 'users', 'customers'])
         if 'revenue' in query_lower:
-            expansions.extend(['total revenue', 'net revenue', 'revenue growth'])
-            
-        if 'payment' in query_lower:
-            expansions.extend(['payment volume', 'total payment volume', 'TPV'])
-        
+            expansions.extend(['total revenue', 'net revenue', 'revenue growth', 'income', 'earnings', 'profit'])
+        if 'payment' in query_lower or 'volume' in query_lower:
+            expansions.extend(['payment volume', 'total payment volume', 'TPV', 'transaction volume', 'transactions'])
+        if 'income' in query_lower:
+            expansions.extend(['net income', 'profit', 'earnings'])
+        if 'trend' in query_lower:
+            expansions.extend(['growth', 'change', 'increase', 'decrease'])
         if expansions:
             return query + " " + " ".join(expansions)
         return query
@@ -236,84 +237,83 @@ class PayPalRAGSystem:
         Generate answer using retrieved context from PayPal reports
         """
         start_time = time.time()
-        
-        # Prepare context from retrieved chunks
+        # Use more context chunks for answer generation (top 10)
         context_parts = []
+        for i, result in enumerate(retrieved_chunks[:10]):
+            chunk_text = result['chunk']['text'] if 'chunk' in result else result.get('text', '')
+            context_parts.append(chunk_text)
+        context = "\n\n".join(context_parts)
+
+        # Strict context-based answer extraction
+        # Check for direct evidence (numbers, dates, keywords)
+        keywords = set(query.lower().split())
+        context_lower = context.lower()
+        has_evidence = any(k in context_lower for k in keywords) or bool(re.findall(r'\d+(?:\.\d+)?', context))
+
+        if not has_evidence or len(context.strip()) < 20:
+            answer = "Information not available in provided context."
+            confidence = 0.2
+        else:
+            # Improved prompt for better factual extraction
+            prompt = f"""You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\n{context}\n\nQuestion: {query}\n\nInstructions:\n- Extract the EXACT answer from the context above\n- Include specific numbers, percentages, and dates when available\n- If the information mentions 'million', 'billion', or specific figures, include them precisely\n- If the exact information isn't in the context, say 'Information not available in provided context'\n- Be direct and factual - don't add interpretations\n\nAnswer:"""
+            # Tokenize and truncate context to fit within GPT2's limits
+            # Reserve some tokens for the generated response
+            MAX_LENGTH = 1024
+            RESERVED_TOKENS = 100
+            
+            # First encode just the context to see its length
+            context_tokens = self.tokenizer.encode(context, add_special_tokens=False)
+            if len(context_tokens) > (MAX_LENGTH - RESERVED_TOKENS):
+                # If context is too long, take the last part that will fit
+                context = self.tokenizer.decode(context_tokens[-(MAX_LENGTH - RESERVED_TOKENS):])
+            
+            # Now create the full prompt with truncated context
+            prompt = f"Based on the following PayPal report excerpts, answer the question.\n\nContext:\n{context}\n\nQuestion: {query}\n\nAnswer:"
+            
+            inputs = self.tokenizer(
+                prompt,
+                return_tensors="pt",
+                max_length=MAX_LENGTH - RESERVED_TOKENS,
+                truncation=True,
+                padding=True,
+                add_special_tokens=True
+            ).to(self.device)
+            
+            with torch.no_grad():
+                outputs = self.generator.generate(
+                    input_ids=inputs["input_ids"],
+                    attention_mask=inputs["attention_mask"],
+                    max_new_tokens=RESERVED_TOKENS,
+                    do_sample=False,
+                    temperature=0.2,
+                    num_beams=1,
+                    pad_token_id=self.tokenizer.eos_token_id,
+                    early_stopping=True
+                )
+            full_response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            # Extract just the answer part
+            if "Answer:" in full_response:
+                answer = full_response.split("Answer:", 1)[-1].strip()
+            else:
+                answer = full_response.strip()
+            # Stricter post-processing for factual answers
+            answer = self._improve_answer_extraction(query, answer, retrieved_chunks)
+            # Lower confidence if answer does not overlap with context
+            context_numbers = set(re.findall(r'\d+(?:\.\d+)?', context))
+            answer_numbers = set(re.findall(r'\d+(?:\.\d+)?', answer))
+            number_overlap = len(context_numbers.intersection(answer_numbers)) / max(len(context_numbers), 1)
+            confidence = 0.8 if number_overlap > 0 and len(answer) > 20 else 0.4
+
+        # Prepare source citations
+        sources = [result['chunk'] for result in retrieved_chunks if 'chunk' in result]
+        # Add metadata for sources
         for i, result in enumerate(retrieved_chunks):
             chunk = result['chunk']
-            year = chunk['metadata'].get('year', 'Unknown')
-            section = chunk['metadata'].get('section', 'Unknown')
-            # Increased from 300 to 800 characters for better context
-            context_parts.append(
-                f"[{year} - {section}]: {chunk['text'][:800]}"
-            )
-        
-        context = "\n\n".join(context_parts)
-        
-        # Improved prompt for better factual extraction
-        prompt = f"""You are a financial analyst extracting precise information from PayPal's annual reports.
+            if 'metadata' in chunk:
+                sources[i]['year'] = chunk['metadata'].get('year')
+                sources[i]['section'] = chunk['metadata'].get('section')
+                sources[i]['score'] = result.get('final_score', 0)
 
-Context from PayPal Annual Reports:
-{context}
-
-Question: {query}
-
-Instructions:
-- Extract the EXACT answer from the context above
-- Include specific numbers, percentages, and dates when available
-- If the information mentions "million", "billion", or specific figures, include them precisely
-- If the exact information isn't in the context, say "Information not available in provided context"
-- Be direct and factual - don't add interpretations
-
-Answer:"""
-        
-        # Tokenize with increased context length
-        inputs = self.tokenizer(
-            prompt,
-            return_tensors="pt",
-            max_length=1200,  # Increased from 800 for more context
-            truncation=True,
-            padding=True
-        ).to(self.device)
-        
-        # Generate response with better parameters for factual extraction
-        with torch.no_grad():
-            outputs = self.generator.generate(
-                inputs.input_ids,
-                max_new_tokens=100,  # Reduced for more focused answers
-                temperature=0.3,     # Lower temperature for more deterministic output
-                do_sample=True,
-                top_p=0.7,          # Reduced for more focused generation
-                repetition_penalty=1.1,  # Prevent repetition
-                pad_token_id=self.tokenizer.pad_token_id,
-                eos_token_id=self.tokenizer.eos_token_id
-            )
-        
-        # Decode response
-        full_response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        
-        # Extract just the answer part
-        if "Answer:" in full_response:
-            answer = full_response.split("Answer:")[-1].strip()
-        else:
-            answer = full_response[len(prompt):].strip()
-        
-        # Post-process answer for better factual accuracy
-        answer = self._improve_answer_extraction(query, answer, retrieved_chunks)
-        
-        # Calculate improved confidence based on multiple factors
-        confidence = self._calculate_improved_confidence(query, answer, retrieved_chunks)
-        
-        # Prepare source citations
-        sources = []
-        for result in retrieved_chunks:
-            chunk = result['chunk']
-            sources.append({
-                'year': chunk['metadata'].get('year'),
-                'section': chunk['metadata'].get('section'),
-                'score': result['final_score']
-            })
-        
         return {
             'answer': answer,
             'confidence': float(confidence),
@@ -328,10 +328,9 @@ Answer:"""
         Complete RAG pipeline: retrieve -> rerank -> generate
         """
         logger.info(f"Processing query: {query}")
-        
-        # Retrieve relevant chunks
-        retrieved = self.hybrid_retrieve(query, filter_year=year_filter)
-        
+        # Expand query for better retrieval
+        expanded_query = self._expand_query(query)
+        retrieved = self.hybrid_retrieve(expanded_query, filter_year=year_filter)
         if not retrieved:
             return {
                 'answer': "No relevant information found in the PayPal reports.",
@@ -340,18 +339,29 @@ Answer:"""
                 'sources': [],
                 'method': 'RAG'
             }
-        
         # Rerank with cross-encoder
         reranked = self.rerank_with_cross_encoder(query, retrieved)
-        
         # Generate answer
         result = self.generate_answer(query, reranked)
-        
         logger.info(f"Answer generated in {result['time']:.2f}s with confidence {result['confidence']:.2f}")
-        
         return result
 
     def _improve_answer_extraction(self, query: str, answer: str, retrieved_chunks: List[Dict[str, Any]]) -> str:
+        # For analytical/comparative questions, extract best matching sentence
+        if any(keyword in query.lower() for keyword in ['risk', 'trend', 'compare', 'change', 'overview', 'summarize']):
+            query_keywords = query.lower().split()
+            best_sentence = ""
+            best_score = 0
+            for chunk in retrieved_chunks:
+                sentences = chunk['chunk']['text'].split('.')
+                for sentence in sentences:
+                    if len(sentence.strip()) > 20:
+                        keyword_matches = sum(1 for word in query_keywords if word in sentence.lower())
+                        if keyword_matches > best_score:
+                            best_score = keyword_matches
+                            best_sentence = sentence.strip()
+            if best_sentence and best_score >= 2:
+                return best_sentence + "."
         """
         Improve answer extraction with specific logic for numerical questions
         """
@@ -452,10 +462,15 @@ Answer:"""
         
         number_overlap = len(context_numbers.intersection(answer_numbers)) / max(len(context_numbers), 1)
         
-        # Check keyword overlap
+        # Check keyword overlap (boost for multi-keyword overlap)
         query_keywords = set(query.lower().split())
         answer_keywords = set(answer.lower().split())
-        keyword_overlap = len(query_keywords.intersection(answer_keywords)) / len(query_keywords)
+        keyword_overlap = len(query_keywords.intersection(answer_keywords)) / max(len(query_keywords), 1)
+        if keyword_overlap > 0.5:
+            keyword_overlap += 0.2  # Boost for strong overlap
+        # Fallback for low-confidence answers
+        if len(answer) < 10 or answer.lower() in ["", "none", "not found"]:
+            answer = "Information not available in provided context."
         
         # Combine factors with more weight on successful extraction
         if len(answer) > 20 and any(keyword in answer.lower() for keyword in ['paypal', 'million', 'billion']):

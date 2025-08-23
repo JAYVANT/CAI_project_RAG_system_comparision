@@ -1,0 +1,277 @@
+{
+  "results": [
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's total revenue in 2023?",
+      "answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\nas President, Global Markets. These leadership appointments underscore Pay...",
+      "full_answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\nas President, Global Markets. These leadership appointments underscore PayPals commitment to building a high-performing organization, with the goal of advancing innovation and solutions to better serve our customers and in turn drive more profitable growth. 2024 Proxy Statement 3 PROXY STATEMENT PROXY STATEMENT SUMMARY Our 2023 Key Highlights Sound Financial and Operation...",
+      "confidence": 0.7,
+      "quality_score": 0.32499999999999996,
+      "response_time": 2.6359241008758545,
+      "question_type": "factual",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's net income in 2024?",
+      "answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\n& Financial Services Group; Diego Scotti, who joined as Executive Vice Pre...",
+      "full_answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\n& Financial Services Group; Diego Scotti, who joined as Executive Vice President, General Manager of our Consumer Group and Global Marketing & Communications; Isabel Cruz, who joined as Executive Vice President, Chief People Officer; and Suzan Kereere, who joined as President, Global Markets. These leadership appointments underscore PayPals commitment to building a high-p...",
+      "confidence": 0.7,
+      "quality_score": 0.15,
+      "response_time": 1.8977830410003662,
+      "question_type": "factual",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "How many active accounts does PayPal have?",
+      "answer": "PayPal has 426 million active accounts.",
+      "full_answer": "PayPal has 426 million active accounts.",
+      "confidence": 0.7,
+      "quality_score": 1.0,
+      "response_time": 2.3929452896118164,
+      "question_type": "factual",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "What is PayPal's competitive advantage?",
+      "answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\n. Since then, Ive spent time with PayPals employees, customers, partners, ...",
+      "full_answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\n. Since then, Ive spent time with PayPals employees, customers, partners, and stockholders to learn about our greatest strengths, where we need to move faster, what we need to change, and how to instill a culture of innovation that returns PayPal to a position of strength. Im pleased with what weve been able to accomplish in such a short period of time to reposition PayPa...",
+      "confidence": 0.7,
+      "quality_score": 0.15,
+      "response_time": 1.9989449977874756,
+      "question_type": "analytical",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "What are the main risks facing PayPal?",
+      "answer": "These forward-looking statements involve risks and uncertainties that could cause our actual results and financial condition to differ materially from those expressed or implied in our forward-looking...",
+      "full_answer": "These forward-looking statements involve risks and uncertainties that could cause our actual results and financial condition to differ materially from those expressed or implied in our forward-looking statements.",
+      "confidence": 0.4,
+      "quality_score": 0.5333333333333333,
+      "response_time": 1.9951848983764648,
+      "question_type": "analytical",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "How does PayPal plan to grow in the future?",
+      "answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\nsteering the successful CEO search and transition, the Board worked closel...",
+      "full_answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\nsteering the successful CEO search and transition, the Board worked closely with management to navigate a complex macroeconomic environment and deliver solid financial and operational results. Looking ahead, we are inspired by the energy and vision that the new leadership team brings to their roles, and we believe PayPal is well-positioned for future profitable growth. Ex...",
+      "confidence": 0.7,
+      "quality_score": 0.3833333333333333,
+      "response_time": 1.9671170711517334,
+      "question_type": "strategic",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "What is the capital of France?",
+      "answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\ncontracts. These foreign currency exchange contracts are accounted for as ...",
+      "full_answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\ncontracts. These foreign currency exchange contracts are accounted for as derivative instruments; for additional details related to our foreign currency exchangecontracts,pleaseseeNote10DerivativeInstrumentstotheconsolidatedfinancialstatementsincludedinthis Form10-K. We use foreign currency exchange forward contracts to protect our forecasted U.S. dollar-equivalent earnin...",
+      "confidence": 0.7,
+      "quality_score": 0.15,
+      "response_time": 2.298672914505005,
+      "question_type": "irrelevant",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "How do you make chocolate cake?",
+      "answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\ninvite you to participate in our Annual Meeting, which will be conducted e...",
+      "full_answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\ninvite you to participate in our Annual Meeting, which will be conducted exclusively online at www.virtualshareholdermeeting.comPYPL2024. See Important Information About PayPals Virtual Annual Meeting on the following page for additional information. The Annual Meeting will begin promptly at 8:00 a.m. Pacific Time. The virtual meeting room will open at 7:45 a.m. Pacific T...",
+      "confidence": 0.7,
+      "quality_score": 0.15,
+      "response_time": 2.1479101181030273,
+      "question_type": "irrelevant",
+      "sources_used": 3
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "What is quantum computing?",
+      "answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\nand Global Head of Data Management, Officer, is ISO 27001 certified and al...",
+      "full_answer": "You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\nand Global Head of Data Management, Officer, is ISO 27001 certified and aligned with other industry collaborates with dedicated teams integrated throughout our frameworks and best practices. business to foster a Data Hygiene by Default and Privacy by We institute 247 monitoring and measurement through our Design culture throughout the Company. PayPal Command Center and Pa...",
+      "confidence": 0.7,
+      "quality_score": 0.15,
+      "response_time": 2.025735378265381,
+      "question_type": "irrelevant",
+      "sources_used": 3
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's total revenue in 2023?",
+      "answer": "PayPal's revenue in 2023 was $1.5 billion.",
+      "full_answer": "PayPal's revenue in 2023 was $1.5 billion.",
+      "confidence": 0.75,
+      "quality_score": 0.825,
+      "response_time": 0.21453428268432617,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's net income in 2024?",
+      "answer": "PayPal's net income in 2024 was $1.5 billion.",
+      "full_answer": "PayPal's net income in 2024 was $1.5 billion.",
+      "confidence": 0.75,
+      "quality_score": 0.7666666666666666,
+      "response_time": 0.1844949722290039,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "How many active accounts does PayPal have?",
+      "answer": "PayPal does not have a single active account.",
+      "full_answer": "PayPal does not have a single active account.",
+      "confidence": 0.75,
+      "quality_score": 0.5333333333333333,
+      "response_time": 0.12893295288085938,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "What is PayPal's competitive advantage?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.75,
+      "quality_score": 0.1,
+      "response_time": 0.26944613456726074,
+      "question_type": "analytical",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "What are the main risks facing PayPal?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.75,
+      "quality_score": 0.1,
+      "response_time": 0.7442209720611572,
+      "question_type": "analytical",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "How does PayPal plan to grow in the future?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.75,
+      "quality_score": 0.1,
+      "response_time": 0.7297391891479492,
+      "question_type": "strategic",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "What is the capital of France?",
+      "answer": "The capital of France is the capital of France.",
+      "full_answer": "The capital of France is the capital of France.",
+      "confidence": 0.75,
+      "quality_score": 0.3,
+      "response_time": 0.1443939208984375,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "How do you make chocolate cake?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.75,
+      "quality_score": 0.1,
+      "response_time": 0.42679595947265625,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "What is quantum computing?",
+      "answer": "Quantum computing is a new form of computing that uses the power of quantum mechanics to solve problems",
+      "full_answer": "Quantum computing is a new form of computing that uses the power of quantum mechanics to solve problems",
+      "confidence": 0.75,
+      "quality_score": 0.15,
+      "response_time": 0.7345643043518066,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    }
+  ],
+  "metrics": {
+    "overall": {
+      "RAG": {
+        "avg_quality": 0.33240740740740743,
+        "avg_confidence": 0.6666666666666666,
+        "avg_response_time": 2.151135312186347,
+        "std_quality": 0.28615156132613134,
+        "total_sources": 27
+      },
+      "Fine-Tuned": {
+        "avg_quality": 0.3305555555555555,
+        "avg_confidence": 0.75,
+        "avg_response_time": 0.3974580764770508,
+        "std_quality": 0.3004048194612655,
+        "total_sources": 0
+      }
+    },
+    "by_category": {
+      "high_confidence_relevant": {
+        "RAG": {
+          "quality": 0.4916666666666667,
+          "confidence": 0.6999999999999998,
+          "time": 2.3088841438293457
+        },
+        "Fine-Tuned": {
+          "quality": 0.7083333333333334,
+          "confidence": 0.75,
+          "time": 0.17598740259806314
+        }
+      },
+      "low_confidence_relevant": {
+        "RAG": {
+          "quality": 0.35555555555555557,
+          "confidence": 0.6,
+          "time": 1.9870823224385579
+        },
+        "Fine-Tuned": {
+          "quality": 0.10000000000000002,
+          "confidence": 0.75,
+          "time": 0.5811354319254557
+        }
+      },
+      "irrelevant": {
+        "RAG": {
+          "quality": 0.15,
+          "confidence": 0.6999999999999998,
+          "time": 2.1574394702911377
+        },
+        "Fine-Tuned": {
+          "quality": 0.18333333333333335,
+          "confidence": 0.75,
+          "time": 0.4352513949076335
+        }
+      }
+    }
+  },
+  "timestamp": "20250823_195444"
+}

@@ -1,0 +1,277 @@
+{
+  "results": [
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's total revenue in 2023?",
+      "answer": "PayPal's revenue was $29.8 billion.",
+      "full_answer": "PayPal's revenue was $29.8 billion.",
+      "confidence": 0.4,
+      "quality_score": 0.5,
+      "response_time": 4.526914834976196,
+      "question_type": "factual",
+      "sources_used": 6
+    },
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's net income in 2024?",
+      "answer": "PayPal's revenue was $29.8 billion.",
+      "full_answer": "PayPal's revenue was $29.8 billion.",
+      "confidence": 0.4,
+      "quality_score": 0.15,
+      "response_time": 3.4065070152282715,
+      "question_type": "factual",
+      "sources_used": 6
+    },
+    {
+      "system": "RAG",
+      "category": "high_confidence_relevant",
+      "question": "How many active accounts does PayPal have?",
+      "answer": "PayPal has 426 million active accounts.",
+      "full_answer": "PayPal has 426 million active accounts.",
+      "confidence": 0.4,
+      "quality_score": 1.0,
+      "response_time": 2.959747076034546,
+      "question_type": "factual",
+      "sources_used": 6
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "What is PayPal's competitive advantage?",
+      "answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\n solid financial and operating results across our key performance metrics. This was accomplished during a period which saw...",
+      "full_answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\n solid financial and operating results across our key performance metrics. This was accomplished during a period which saw the successful transition of multiple key leadership roles, accompanied by macroeconomic uncertainty, slowing e-commerce growth and continued geopolitical instability. We ended the year with 426 million active consumer and merchant accounts and $29.8 billion in revenue, an 8% increase compared to 2...",
+      "confidence": 0.8,
+      "quality_score": 0.15,
+      "response_time": 2.6500580310821533,
+      "question_type": "analytical",
+      "sources_used": 6
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "What are the main risks facing PayPal?",
+      "answer": "We conduct an annual compensation risk assessment to evaluate whether our executive Annual compensation risk compensation program presents any risks that are reasonably likely to have a material adver...",
+      "full_answer": "We conduct an annual compensation risk assessment to evaluate whether our executive Annual compensation risk compensation program presents any risks that are reasonably likely to have a material adverse assessment effect on PayPal.",
+      "confidence": 0.4,
+      "quality_score": 0.5333333333333333,
+      "response_time": 2.558678150177002,
+      "question_type": "analytical",
+      "sources_used": 6
+    },
+    {
+      "system": "RAG",
+      "category": "low_confidence_relevant",
+      "question": "How does PayPal plan to grow in the future?",
+      "answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\n around the customers we serve consumers, small businesses, and enterprises. Weve narrowed our focus to the products and s...",
+      "full_answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\n around the customers we serve consumers, small businesses, and enterprises. Weve narrowed our focus to the products and services that will have the greatest impact for our customers. And weve updated our mission to reflect the evolution of our purpose: revolutionizing commerce globally. Were embracing our roots to reshape commerce for the consumers and merchants around the world who rely on PayPal each day making it f...",
+      "confidence": 0.8,
+      "quality_score": 0.15,
+      "response_time": 1.702383041381836,
+      "question_type": "strategic",
+      "sources_used": 6
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "What is the capital of France?",
+      "answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\nbutdonot entirely eliminate, the impact of currency exchange rate movements on our assets and liabilities. The foreign cur...",
+      "full_answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\nbutdonot entirely eliminate, the impact of currency exchange rate movements on our assets and liabilities. The foreign currency exchangegainsandlossesonourassetsandliabilitiesarerecordedinotherincome(expense),net,andareoffsetbythe gainsandlossesontheforeigncurrencyexchangecontracts. Adverse changes in exchange rates of a hypothetical 10% for all foreign currencies would have resulted in a negative impact on income befo...",
+      "confidence": 0.8,
+      "quality_score": 0.15,
+      "response_time": 1.49263596534729,
+      "question_type": "irrelevant",
+      "sources_used": 6
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "How do you make chocolate cake?",
+      "answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\nPL2024. Stockholders of record and beneficial owners as of the March 27, 2024 Record Date may vote their shares electronic...",
+      "full_answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\nPL2024. Stockholders of record and beneficial owners as of the March 27, 2024 Record Date may vote their shares electronically during the virtual Annual Meeting. On the date of the Annual\n\nin to the meeting platform beginning at 7:45 a.m. Pacific Time on May 22, 2024. The meeting will begin promptly at 8:00 a.m. Pacific Time. You will need the 16-digit control number provided in your proxy materials to attend the virtu...",
+      "confidence": 0.8,
+      "quality_score": 0.15,
+      "response_time": 2.6073873043060303,
+      "question_type": "irrelevant",
+      "sources_used": 6
+    },
+    {
+      "system": "RAG",
+      "category": "irrelevant",
+      "question": "What is quantum computing?",
+      "answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\n23, representing 119% of our free cash flow. In June 2023, we entered into a multi-year agreement with a global investment...",
+      "full_answer": "Based on the following PayPal report excerpts, answer the question.\n\nContext:\n23, representing 119% of our free cash flow. In June 2023, we entered into a multi-year agreement with a global investment firm to sell up to 40 billion of our eligible consumer installment receivables portfolio, including a forward-flow arrangement for the sale of future originations, and sold $5.5 billion of loans receivable during the year in connection with this agreement. Additionally, we completed the divestiture...",
+      "confidence": 0.8,
+      "quality_score": 0.15,
+      "response_time": 2.668504238128662,
+      "question_type": "irrelevant",
+      "sources_used": 6
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's total revenue in 2023?",
+      "answer": "PayPal's total revenue in 2023 was $1.4 billion.",
+      "full_answer": "PayPal's total revenue in 2023 was $1.4 billion.",
+      "confidence": 0.75,
+      "quality_score": 0.825,
+      "response_time": 0.2464747428894043,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "What was PayPal's net income in 2024?",
+      "answer": "PayPal's net income in 2024 was $1.4 billion.",
+      "full_answer": "PayPal's net income in 2024 was $1.4 billion.",
+      "confidence": 0.75,
+      "quality_score": 0.7666666666666666,
+      "response_time": 0.19306015968322754,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "high_confidence_relevant",
+      "question": "How many active accounts does PayPal have?",
+      "answer": "The PayPal website has about 1,000 active accounts.",
+      "full_answer": "The PayPal website has about 1,000 active accounts.",
+      "confidence": 0.75,
+      "quality_score": 0.7666666666666666,
+      "response_time": 0.16925787925720215,
+      "question_type": "factual",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "What is PayPal's competitive advantage?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.75,
+      "quality_score": 0.1,
+      "response_time": 0.27820801734924316,
+      "question_type": "analytical",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "What are the main risks facing PayPal?",
+      "answer": "PayPal is a risk that is not a concern for most people. The risks are not as big as they might seem.",
+      "full_answer": "PayPal is a risk that is not a concern for most people. The risks are not as big as they might seem.",
+      "confidence": 0.75,
+      "quality_score": 0.5333333333333333,
+      "response_time": 0.3113729953765869,
+      "question_type": "analytical",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "low_confidence_relevant",
+      "question": "How does PayPal plan to grow in the future?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.75,
+      "quality_score": 0.1,
+      "response_time": 0.7216610908508301,
+      "question_type": "strategic",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "What is the capital of France?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.75,
+      "quality_score": 0.1,
+      "response_time": 0.7173619270324707,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "How do you make chocolate cake?",
+      "answer": "The model generated repetitive text. Please rephrase your question.",
+      "full_answer": "The model generated repetitive text. Please rephrase your question.",
+      "confidence": 0.75,
+      "quality_score": 0.1,
+      "response_time": 0.7143030166625977,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    },
+    {
+      "system": "Fine-Tuned",
+      "category": "irrelevant",
+      "question": "What is quantum computing?",
+      "answer": "Quantum computing is a new form of computing that uses the power of quantum mechanics to solve problems",
+      "full_answer": "Quantum computing is a new form of computing that uses the power of quantum mechanics to solve problems",
+      "confidence": 0.75,
+      "quality_score": 0.15,
+      "response_time": 0.71232008934021,
+      "question_type": "irrelevant",
+      "sources_used": 0
+    }
+  ],
+  "metrics": {
+    "overall": {
+      "RAG": {
+        "avg_quality": 0.3259259259259259,
+        "avg_confidence": 0.6222222222222222,
+        "avg_response_time": 2.730312850740221,
+        "std_quality": 0.29862080087637793,
+        "total_sources": 54
+      },
+      "Fine-Tuned": {
+        "avg_quality": 0.3824074074074073,
+        "avg_confidence": 0.75,
+        "avg_response_time": 0.4515577687157525,
+        "std_quality": 0.33298013695254897,
+        "total_sources": 0
+      }
+    },
+    "by_category": {
+      "high_confidence_relevant": {
+        "RAG": {
+          "quality": 0.5499999999999999,
+          "confidence": 0.4000000000000001,
+          "time": 3.631056308746338
+        },
+        "Fine-Tuned": {
+          "quality": 0.7861111111111111,
+          "confidence": 0.75,
+          "time": 0.20293092727661133
+        }
+      },
+      "low_confidence_relevant": {
+        "RAG": {
+          "quality": 0.2777777777777778,
+          "confidence": 0.6666666666666666,
+          "time": 2.303706407546997
+        },
+        "Fine-Tuned": {
+          "quality": 0.24444444444444444,
+          "confidence": 0.75,
+          "time": 0.43708070119222003
+        }
+      },
+      "irrelevant": {
+        "RAG": {
+          "quality": 0.15,
+          "confidence": 0.8000000000000002,
+          "time": 2.2561758359273276
+        },
+        "Fine-Tuned": {
+          "quality": 0.11666666666666665,
+          "confidence": 0.75,
+          "time": 0.7146616776784261
+        }
+      }
+    }
+  },
+  "timestamp": "20250823_204734"
+}

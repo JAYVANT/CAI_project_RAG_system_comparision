@@ -9,6 +9,7 @@ import json
 import time
 import logging
 from typing import List, Dict, Any, Tuple
+import re
 from pathlib import Path
 import numpy as np
 import torch
@@ -183,10 +184,10 @@ class PayPalFineTunedModel:
         for param in self.model.transformer.wpe.parameters():
             param.requires_grad = False
         
-        # Freeze all but the last 2 transformer blocks
+        # Freeze all but the last transformer block
         num_layers = len(self.model.transformer.h)
         for i, layer in enumerate(self.model.transformer.h):
-            if i < num_layers - 2:  # Freeze all but last 2 layers
+            if i < num_layers - 1:  # Freeze all but last layer
                 for param in layer.parameters():
                     param.requires_grad = False
         
@@ -338,38 +339,36 @@ class PayPalFineTunedModel:
         inputs = self.tokenizer(
             prompt,
             return_tensors="pt",
-            max_length=200,
+            max_length=150,
             truncation=True,
             padding=True
         ).to(self.device)
-        
         # Generate
         self.model.eval()
         with torch.no_grad():
             outputs = self.model.generate(
                 inputs.input_ids,
                 attention_mask=inputs.attention_mask,
-                max_new_tokens=150,
-                temperature=0.7,
-                do_sample=True,
-                top_p=0.9,
-                pad_token_id=self.tokenizer.pad_token_id,
-                eos_token_id=self.tokenizer.eos_token_id
+                max_new_tokens=60,
+                temperature=0.5,
+                do_sample=False,
+                pad_token_id=self.tokenizer.eos_token_id
             )
-        
-        # Decode
         response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        
         # Extract answer
         if "Answer:" in response:
             answer = response.split("Answer:")[-1].strip()
         else:
             answer = response[len(prompt):].strip()
-        
-        # Calculate confidence (based on generation probability)
-        # Simplified - in practice, extract from model outputs
-        confidence = 0.75 + np.random.uniform(-0.1, 0.15)
-        
+        # Guardrail: check for factual overlap
+        query_keywords = set(query.lower().split())
+        answer_lower = answer.lower()
+        has_overlap = any(k in answer_lower for k in query_keywords) or bool(re.findall(r'\d+(?:\.\d+)?', answer))
+        if not has_overlap or len(answer) < 10:
+            answer = "Information not available in provided context."
+            confidence = 0.3
+        else:
+            confidence = 0.75
         return {
             'answer': answer,
             'confidence': min(max(confidence, 0.0), 1.0),

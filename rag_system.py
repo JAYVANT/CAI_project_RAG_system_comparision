@@ -259,18 +259,37 @@ class PayPalRAGSystem:
             context_parts.append(chunk_text)
         context = "\n\n".join(context_parts)
 
-        # Strict context-based answer extraction
-        # Check for direct evidence (numbers, dates, keywords)
+        # Enhanced context-based answer extraction
         keywords = set(query.lower().split())
         context_lower = context.lower()
-        has_evidence = any(k in context_lower for k in keywords) or bool(re.findall(r'\d+(?:\.\d+)?', context))
-
-        if not has_evidence or len(context.strip()) < 20:
-            answer = "Information not available in provided context."
-            confidence = 0.2
+        
+        # More sophisticated evidence check
+        numeric_evidence = bool(re.findall(r'\$?\d+(?:\.\d+)?(?:\s*(?:million|billion|m|b|M|B))?', context))
+        keyword_evidence = sum(k in context_lower for k in keywords) >= len(keywords) * 0.5
+        year_match = any(year in context for year in ['2023', '2024']) if any(year in query for year in ['2023', '2024']) else True
+        
+        if not (numeric_evidence or keyword_evidence) or len(context.strip()) < 20 or not year_match:
+            answer = "I apologize, but I don't have enough accurate information in the available context to answer this question reliably."
+            confidence = 0.1
         else:
-            # Improved prompt for better factual extraction
-            prompt = f"""You are a financial analyst extracting precise information from PayPal's annual reports.\n\nContext from PayPal Annual Reports:\n{context}\n\nQuestion: {query}\n\nInstructions:\n- Extract the EXACT answer from the context above\n- Include specific numbers, percentages, and dates when available\n- If the information mentions 'million', 'billion', or specific figures, include them precisely\n- If the exact information isn't in the context, say 'Information not available in provided context'\n- Be direct and factual - don't add interpretations\n\nAnswer:"""
+            # Enhanced prompt for more accurate extraction
+            prompt = f"""You are a precise financial analyst extracting factual information from PayPal's annual reports.
+
+Context from PayPal Reports:
+{context}
+
+Question: {query}
+
+Rules for answering:
+1. ONLY use information explicitly stated in the context
+2. Include exact numbers, currency values, and dates from the context
+3. If a specific year is asked for, only use data from that year
+4. For financial figures, always specify the year and include units (million/billion)
+5. If the exact information isn't in the context, respond with "I don't have accurate information to answer this question"
+6. Keep the answer concise and focused on the question
+7. Do not make projections or interpretations
+
+Answer:
             # Tokenize and truncate context to fit within GPT2's limits
             # Reserve some tokens for the generated response
             MAX_LENGTH = 1024
@@ -613,7 +632,7 @@ class RAGGuardrails:
 
 def load_and_initialize_rag(processed_data_path: str = "./processed_data/paypal_processed_data.json", use_default_model: bool = True):
     """
-    Load processed data and initialize RAG system with fallback to default models
+    Load processed data and initialize RAG system with enhanced default models
     
     Args:
         processed_data_path: Path to the processed data JSON file
@@ -622,33 +641,53 @@ def load_and_initialize_rag(processed_data_path: str = "./processed_data/paypal_
     logger.info("Initializing RAG system...")
     
     try:
-        # Load processed data
+        # Load and validate processed data
         try:
             with open(processed_data_path, 'r') as f:
                 data = json.load(f)
-        except FileNotFoundError:
-            logger.error(f"Processed data file not found at {processed_data_path}")
-            # Create minimal data structure
+            
+            # Validate data structure
+            if not isinstance(data, dict) or 'chunks' not in data:
+                logger.warning("Invalid data structure in processed data file")
+                data = {'chunks': [], 'qa_pairs': []}
+            
+            # Ensure all chunks have required fields
+            valid_chunks = []
+            for chunk in data.get('chunks', []):
+                if isinstance(chunk, dict) and 'text' in chunk and 'metadata' in chunk:
+                    # Clean and validate chunk text
+                    chunk['text'] = chunk['text'].strip()
+                    if len(chunk['text']) > 10:  # Minimum content threshold
+                        valid_chunks.append(chunk)
+            
+            if not valid_chunks:
+                logger.warning("No valid chunks found in processed data")
+            data['chunks'] = valid_chunks
+            
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            logger.error(f"Error loading processed data: {str(e)}")
             data = {'chunks': [], 'qa_pairs': []}
         
-        # Always initialize with default models first
-        logger.info("Initializing with default HuggingFace models")
+        # Initialize with better default models
+        logger.info("Initializing with enhanced default models")
         rag = PayPalRAGSystem(
-            embedding_model="sentence-transformers/all-MiniLM-L6-v2",
-            cross_encoder_model="cross-encoder/ms-marco-MiniLM-L-6-v2",
-            generator_model="gpt2"
+            embedding_model="sentence-transformers/all-mpnet-base-v2",  # Upgraded embedding model
+            cross_encoder_model="cross-encoder/ms-marco-MiniLM-L-12-v2",  # Upgraded cross-encoder
+            generator_model="gpt2-medium"  # Upgraded to medium size model
         )
         
         # Try to use local fine-tuned model if requested
         if not use_default_model:
-            if Path("./models/paypal_finetuned/model.safetensors").exists():
+            model_path = Path("./models/paypal_finetuned/model.safetensors")
+            if model_path.exists() and model_path.stat().st_size > 1000000:  # Check if model file is valid
                 try:
                     logger.info("Loading local fine-tuned model...")
                     rag = PayPalRAGSystem(generator_model="./models/paypal_finetuned")
+                    logger.info("Successfully loaded local model")
                 except Exception as e:
-                    logger.warning(f"Failed to load local model, using default GPT-2: {e}")
+                    logger.warning(f"Failed to load local model, using enhanced default model: {e}")
             else:
-                logger.warning("Local model not found, using default GPT-2")
+                logger.warning("Local model not found or invalid, using enhanced default model")
         
         # Build indices from chunks
         rag.build_indices(data['chunks'])

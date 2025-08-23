@@ -329,46 +329,72 @@ class PayPalFineTunedModel:
         return total_loss / len(dataloader)
     
     def generate_answer(self, query: str) -> Dict[str, Any]:
-        """Generate answer using fine-tuned model"""
+        """Generate answer using fine-tuned model with enhanced validation"""
         start_time = time.time()
         
-        # Format input
-        prompt = f"Question: {query}\nAnswer:"
+        # Enhanced prompt with explicit instructions
+        prompt = f"""Question: {query}
+Instructions: Provide a precise, factual answer based on PayPal's financial data. Include specific numbers and dates when available. Only state information you are certain about.
+Answer:"""
         
-        # Tokenize
+        # Tokenize with increased max length
         inputs = self.tokenizer(
             prompt,
             return_tensors="pt",
-            max_length=150,
+            max_length=200,  # Increased for better context
             truncation=True,
             padding=True
         ).to(self.device)
-        # Generate
+        
+        # Generate with improved parameters
         self.model.eval()
         with torch.no_grad():
             outputs = self.model.generate(
                 inputs.input_ids,
                 attention_mask=inputs.attention_mask,
-                max_new_tokens=60,
-                temperature=0.5,
-                do_sample=False,
+                max_new_tokens=100,  # Increased for more complete answers
+                num_beams=3,  # Added beam search for better quality
+                temperature=0.3,  # Reduced for more focused answers
+                no_repeat_ngram_size=3,  # Prevent repetition
+                do_sample=True,  # Enable sampling for variety
+                top_p=0.9,  # Nucleus sampling
                 pad_token_id=self.tokenizer.eos_token_id
             )
+        
         response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        # Extract answer
+        
+        # Improved answer extraction
         if "Answer:" in response:
             answer = response.split("Answer:")[-1].strip()
         else:
             answer = response[len(prompt):].strip()
-        # Guardrail: check for factual overlap
+        
+        # Enhanced validation
         query_keywords = set(query.lower().split())
         answer_lower = answer.lower()
-        has_overlap = any(k in answer_lower for k in query_keywords) or bool(re.findall(r'\d+(?:\.\d+)?', answer))
-        if not has_overlap or len(answer) < 10:
-            answer = "Information not available in provided context."
-            confidence = 0.3
+        
+        # Multiple validation checks
+        has_keywords = sum(k in answer_lower for k in query_keywords) >= len(query_keywords) * 0.3
+        has_numbers = bool(re.findall(r'\$?\d+(?:\.\d+)?(?:\s*(?:million|billion|m|b|M|B))?', answer))
+        has_year = any(year in answer for year in ['2023', '2024']) if any(year in query for year in ['2023', '2024']) else True
+        is_long_enough = len(answer.split()) >= 5
+        
+        # Calculate confidence based on multiple factors
+        if not has_year:
+            answer = "I apologize, but I don't have accurate information for the specific year you're asking about."
+            confidence = 0.1
+        elif not (has_keywords and is_long_enough):
+            answer = "I apologize, but I cannot provide accurate information for this question."
+            confidence = 0.2
         else:
-            confidence = 0.75
+            # Base confidence on validation factors
+            confidence = 0.5
+            if has_numbers:
+                confidence += 0.2
+            if has_keywords:
+                confidence += 0.2
+            if is_long_enough:
+                confidence += 0.1
         return {
             'answer': answer,
             'confidence': min(max(confidence, 0.0), 1.0),

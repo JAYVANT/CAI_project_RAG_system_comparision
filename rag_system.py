@@ -54,8 +54,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class PayPalRAGSystem:
-    """RAG system specifically tuned for PayPal financial reports"""
-    
     def __init__(self, 
                  embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2",
                  cross_encoder_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2",
@@ -91,9 +89,7 @@ class PayPalRAGSystem:
         self.rerank_top_k = 6
         
     def _ensure_model_files(self):
-        """
-        Check if required model files are present and download if needed
-        """
+        """Check if required model files are present and download if needed."""
         model_path = Path("models/paypal_finetuned/model.safetensors")
         if not model_path.exists():
             logger.info("Model file not found. Using default GPT-2 model...")
@@ -103,9 +99,7 @@ class PayPalRAGSystem:
             self.using_default_model = False
             
     def build_indices(self, chunks: List[Dict[str, Any]]):
-        """
-        Build both dense (FAISS) and sparse (TF-IDF) indices
-        """
+        """Build both dense (FAISS) and sparse (TF-IDF) indices."""
         logger.info(f"Building indices for {len(chunks)} chunks...")
         self.chunks = chunks
         texts = [chunk['text'] for chunk in chunks]
@@ -134,9 +128,7 @@ class PayPalRAGSystem:
         logger.info(f"✅ Indices built successfully!")
         
     def hybrid_retrieve(self, query: str, filter_year: str = None) -> List[Dict[str, Any]]:
-        """
-        Hybrid retrieval combining dense and sparse methods with query expansion
-        """
+        """Hybrid retrieval combining dense and sparse methods with query expansion."""
         # Expand query for better matching
         expanded_query = self._expand_query(query)
         
@@ -251,9 +243,7 @@ class PayPalRAGSystem:
         return boost
     
     def rerank_with_cross_encoder(self, query: str, results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """
-        Re-rank retrieved chunks using cross-encoder for better accuracy
-        """
+        """Re-rank retrieved chunks using cross-encoder for better accuracy."""
         if not results:
             return results
         
@@ -278,9 +268,7 @@ class PayPalRAGSystem:
         return reranked[:self.rerank_top_k]
     
     def generate_answer(self, query: str, retrieved_chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        Generate answer using retrieved context from PayPal reports
-        """
+        """Generate answer using retrieved context from PayPal reports."""
         start_time = time.time()
         # Use more context chunks for answer generation (top 10)
         context_parts = []
@@ -303,23 +291,20 @@ class PayPalRAGSystem:
             confidence = 0.1
         else:
             # Enhanced prompt for more accurate extraction
-            prompt = f"""You are a precise financial analyst extracting factual information from PayPal's annual reports.
-
-Context from PayPal Reports:
-{context}
-
-Question: {query}
-
-Rules for answering:
-1. ONLY use information explicitly stated in the context
-2. Include exact numbers, currency values, and dates from the context
-3. If a specific year is asked for, only use data from that year
-4. For financial figures, always specify the year and include units (million/billion)
-5. If the exact information isn't in the context, respond with "I don't have accurate information to answer this question"
-6. Keep the answer concise and focused on the question
-7. Do not make projections or interpretations
-
-Answer:
+            prompt = (
+                f"You are a precise financial analyst extracting factual information from PayPal's annual reports.\n\n"
+                f"Context from PayPal Reports:\n{context}\n\n"
+                f"Question: {query}\n\n"
+                f"Rules for answering:\n"
+                f"1. ONLY use information explicitly stated in the context\n"
+                f"2. Include exact numbers, currency values, and dates from the context\n"
+                f"3. If a specific year is asked for, only use data from that year\n"
+                f"4. For financial figures, always specify the year and include units (million/billion)\n"
+                f"5. If the exact information isn't in the context, respond with \"I don't have accurate information to answer this question\"\n"
+                f"6. Keep the answer concise and focused on the question\n"
+                f"7. Do not make projections or interpretations\n\n"
+                f"Answer:"
+            )
             # Tokenize and truncate context to fit within GPT2's limits
             # Reserve some tokens for the generated response
             MAX_LENGTH = 1024
@@ -388,9 +373,7 @@ Answer:
         }
     
     def answer_question(self, query: str, year_filter: str = None) -> Dict[str, Any]:
-        """
-        Complete RAG pipeline: retrieve -> rerank -> generate
-        """
+        """Complete RAG pipeline: retrieve -> rerank -> generate."""
         logger.info(f"Processing query: {query}")
         # Expand query for better retrieval
         expanded_query = self._expand_query(query)
@@ -426,9 +409,7 @@ Answer:
                             best_sentence = sentence.strip()
             if best_sentence and best_score >= 2:
                 return best_sentence + "."
-        """
-        Improve answer extraction with specific logic for numerical questions
-        """
+        """Improve answer extraction with specific logic for numerical questions."""
         import re
         
         # Get all context text
@@ -556,9 +537,7 @@ Answer:
         return min(confidence, 1.0)
     
     def debug_retrieval(self, query: str, year_filter: str = None):
-        """
-        Debug method to see what chunks are being retrieved and why
-        """
+        """Debug method to see what chunks are being retrieved and why."""
         print(f"\n🔍 DEBUG: Retrieving chunks for query: '{query}'")
         if year_filter:
             print(f"📅 Year filter: {year_filter}")
@@ -593,7 +572,7 @@ Answer:
         return reranked
     
 class RAGGuardrails:
-    """Input and output guardrails for RAG system"""
+    """Input and output guardrails for RAG system."""
     
     def __init__(self):
         self.min_confidence_threshold = 0.15  # Lowered from 0.3 for better factual answers
@@ -662,13 +641,13 @@ class RAGGuardrails:
 
 def load_and_initialize_rag(processed_data_path: str = "./processed_data/paypal_processed_data.json", use_default_model: bool = True):
     """Load processed data and initialize RAG system with enhanced default models.
-    
+
     This function initializes the RAG system with either default or custom models
     and loads the processed data for retrieval.
-    
+
     Args:
-        processed_data_path (str): Path to the processed data JSON file
-        use_default_model (bool): If True, uses default HuggingFace models
+        processed_data_path: Path to the processed data JSON file
+        use_default_model: If True, uses default HuggingFace models
     
     Returns:
         tuple: Contains (rag_system, guardrails, processed_data)

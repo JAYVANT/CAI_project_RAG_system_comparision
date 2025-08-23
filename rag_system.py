@@ -611,28 +611,58 @@ class RAGGuardrails:
         
         return response
 
-def load_and_initialize_rag(processed_data_path: str = "./processed_data/paypal_processed_data.json"):
+def load_and_initialize_rag(processed_data_path: str = "./processed_data/paypal_processed_data.json", use_default_model: bool = True):
     """
-    Load processed data and initialize RAG system
+    Load processed data and initialize RAG system with fallback to default models
+    
+    Args:
+        processed_data_path: Path to the processed data JSON file
+        use_default_model: If True, uses default HuggingFace models instead of local models
     """
     logger.info("Initializing RAG system...")
     
-    # Load processed data
-    with open(processed_data_path, 'r') as f:
-        data = json.load(f)
-    
-    # Initialize RAG system
-    rag = PayPalRAGSystem()
-    
-    # Build indices from chunks
-    rag.build_indices(data['chunks'])
-    
-    # Initialize guardrails
-    guardrails = RAGGuardrails()
-    
-    logger.info("✅ RAG system ready!")
-    
-    return rag, guardrails, data
+    try:
+        # Load processed data
+        try:
+            with open(processed_data_path, 'r') as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            logger.error(f"Processed data file not found at {processed_data_path}")
+            # Create minimal data structure
+            data = {'chunks': [], 'qa_pairs': []}
+        
+        # Always initialize with default models first
+        logger.info("Initializing with default HuggingFace models")
+        rag = PayPalRAGSystem(
+            embedding_model="sentence-transformers/all-MiniLM-L6-v2",
+            cross_encoder_model="cross-encoder/ms-marco-MiniLM-L-6-v2",
+            generator_model="gpt2"
+        )
+        
+        # Try to use local fine-tuned model if requested
+        if not use_default_model:
+            if Path("./models/paypal_finetuned/model.safetensors").exists():
+                try:
+                    logger.info("Loading local fine-tuned model...")
+                    rag = PayPalRAGSystem(generator_model="./models/paypal_finetuned")
+                except Exception as e:
+                    logger.warning(f"Failed to load local model, using default GPT-2: {e}")
+            else:
+                logger.warning("Local model not found, using default GPT-2")
+        
+        # Build indices from chunks
+        rag.build_indices(data['chunks'])
+        
+        # Initialize guardrails
+        guardrails = RAGGuardrails()
+        
+        logger.info("✅ RAG system ready!")
+        
+        return rag, guardrails, data
+        
+    except Exception as e:
+        logger.error(f"Error initializing RAG system: {str(e)}")
+        raise Exception(f"Failed to initialize RAG system: {str(e)}")
 
 if __name__ == "__main__":
     # Load and test RAG system

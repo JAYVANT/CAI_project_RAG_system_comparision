@@ -9,15 +9,30 @@ import json
 import time
 import logging
 import re
+import os
+import warnings
 from typing import List, Dict, Any, Tuple
 from pathlib import Path
-import numpy as np
-import torch
-from sentence_transformers import SentenceTransformer, CrossEncoder
-import faiss
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-from transformers import GPT2TokenizerFast, GPT2LMHeadModel
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Suppress specific warnings
+warnings.filterwarnings('ignore', category=UserWarning)
+
+try:
+    import numpy as np
+    import torch
+    from sentence_transformers import SentenceTransformer, CrossEncoder
+    import faiss
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics.pairwise import cosine_similarity
+    from transformers import GPT2TokenizerFast, GPT2LMHeadModel, AutoTokenizer, AutoModel
+except ImportError as e:
+    logger.error(f"Failed to import required modules: {str(e)}")
+    logger.error("Please install required packages: pip install -r requirements.txt")
+    raise
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)

@@ -5,23 +5,50 @@ Streamlit web interface for PayPal Financial Q&A System
 Provides interactive UI for testing both RAG and Fine-tuned systems
 """
 
-import streamlit as st
+import os
+import sys
+import logging
+import warnings
 import json
 import time
 from pathlib import Path
-import pandas as pd
-import plotly.graph_objects as go
-import plotly.express as px
+from typing import Dict, Any, Optional
 from datetime import datetime
 
-# Import our modules
-from rag_system import load_and_initialize_rag
-from finetune_system import PayPalFineTunedModel, FineTuneGuardrails
-import logging
-
-# Setup logging
-logging.basicConfig(level=logging.INFO)
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
+
+# Suppress specific warnings
+warnings.filterwarnings('ignore', category=UserWarning)
+
+# Add the current directory to Python path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.append(current_dir)
+
+try:
+    # External dependencies
+    import streamlit as st
+    import pandas as pd
+    import plotly.graph_objects as go
+    import plotly.express as px
+    
+    # Local imports - with error handling
+    try:
+        from rag_system import load_and_initialize_rag
+        from finetune_system import PayPalFineTunedModel, FineTuneGuardrails
+    except ImportError as e:
+        logger.error(f"Failed to import local modules: {str(e)}")
+        logger.error("Make sure all required files are in the correct location")
+        raise
+except ImportError as e:
+    logger.error(f"Failed to import required packages: {str(e)}")
+    logger.error("Please install required packages: pip install -r requirements.txt")
+    raise
 
 # Page configuration
 st.set_page_config(

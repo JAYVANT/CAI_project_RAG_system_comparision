@@ -10,17 +10,27 @@ import time
 import logging
 import re
 import os
+import sys
 import warnings
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 from pathlib import Path
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
 
 # Suppress specific warnings
 warnings.filterwarnings('ignore', category=UserWarning)
 
+# Add the current directory to Python path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.append(current_dir)
+
+# Try to import required packages
 try:
     import numpy as np
     import torch
@@ -28,7 +38,12 @@ try:
     import faiss
     from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.metrics.pairwise import cosine_similarity
-    from transformers import GPT2TokenizerFast, GPT2LMHeadModel, AutoTokenizer, AutoModel
+    from transformers import (
+        GPT2TokenizerFast,
+        GPT2LMHeadModel,
+        AutoTokenizer,
+        AutoModel
+    )
 except ImportError as e:
     logger.error(f"Failed to import required modules: {str(e)}")
     logger.error("Please install required packages: pip install -r requirements.txt")
@@ -646,12 +661,17 @@ class RAGGuardrails:
         return response
 
 def load_and_initialize_rag(processed_data_path: str = "./processed_data/paypal_processed_data.json", use_default_model: bool = True):
-    """
-    Load processed data and initialize RAG system with enhanced default models
+    """Load processed data and initialize RAG system with enhanced default models.
+    
+    This function initializes the RAG system with either default or custom models
+    and loads the processed data for retrieval.
     
     Args:
-        processed_data_path: Path to the processed data JSON file
-        use_default_model: If True, uses default HuggingFace models instead of local models
+        processed_data_path (str): Path to the processed data JSON file
+        use_default_model (bool): If True, uses default HuggingFace models
+    
+    Returns:
+        tuple: Contains (rag_system, guardrails, processed_data)
     """
     logger.info("Initializing RAG system...")
     

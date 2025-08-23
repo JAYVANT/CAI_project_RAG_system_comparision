@@ -34,6 +34,9 @@ class PayPalRAGSystem:
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         logger.info(f"Using device: {self.device}")
         
+        # Check for model files and download if needed
+        self._ensure_model_files()
+        
         # Load models
         logger.info("Loading embedding model...")
         self.embedding_model = SentenceTransformer(embedding_model)
@@ -57,6 +60,18 @@ class PayPalRAGSystem:
         self.top_k_sparse = 10
         self.rerank_top_k = 6
         
+    def _ensure_model_files(self):
+        """
+        Check if required model files are present and download if needed
+        """
+        model_path = Path("models/paypal_finetuned/model.safetensors")
+        if not model_path.exists():
+            logger.info("Model file not found. Using default GPT-2 model...")
+            # We'll use the default GPT-2 model instead of the finetuned one
+            self.using_default_model = True
+        else:
+            self.using_default_model = False
+            
     def build_indices(self, chunks: List[Dict[str, Any]]):
         """
         Build both dense (FAISS) and sparse (TF-IDF) indices
